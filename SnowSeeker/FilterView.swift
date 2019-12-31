@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FilterView: View {
     @Binding var resorts: [Resort]
-    @Binding var isFiltered: Bool
+    @Binding var filters: [String: String]
     
     private let countries = ["All", "Austria", "Canada", "France", "Italy", "United States"]
     private let sizes = ["All", "Small", "Average", "Large"]
@@ -19,6 +19,8 @@ struct FilterView: View {
     @State private var selectedCountry = "All"
     @State private var selectedSize = "All"
     @State private var selectedPrice = "All"
+    
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
@@ -53,14 +55,31 @@ struct FilterView: View {
                 
                 Section {
                     Button("Apply Filter") {
-                        
+                        self.filters = ["country": self.selectedCountry, "size": self.selectedSize, "price": self.selectedPrice]
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 }
+                
+                Section {
+                    Button("Clear Filter") {
+                        self.selectedCountry = "All"
+                        self.selectedSize = "All"
+                        self.selectedPrice = "All"
+                    }
+                    .foregroundColor(.red)
+                }
+                
+                
             }
             .navigationBarTitle(Text("Filter"), displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
-                
+                self.presentationMode.wrappedValue.dismiss()
             })
+        }
+        .onAppear {
+            self.selectedCountry = self.filters["country"] ?? "All"
+            self.selectedSize = self.filters["size"] ?? "All"
+            self.selectedPrice = self.filters["price"] ?? "All"
         }
     }
 }
@@ -68,7 +87,7 @@ struct FilterView: View {
 struct FilterView_Previews: PreviewProvider {
     static var previews: some View {
         let resorts = Binding.constant([Resort.example])
-        let isFiltered = Binding.constant(true)
-        return FilterView(resorts: resorts, isFiltered: isFiltered)
+        let filters = Binding.constant(["country": "All", "size": "All", "price": "All"])
+        return FilterView(resorts: resorts, filters: filters)
     }
 }

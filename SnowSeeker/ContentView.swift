@@ -12,12 +12,28 @@ struct ContentView: View {
     @State private var resorts: [Resort] = Bundle.main.decode("resorts.json")
     @State private var showingSortingActionSheet = false
     @State private var showingFilterSheet = false
-    @State private var isFiltered = false
+    @State private var filters = ["country": "All", "size": "All", "price": "All"]
+    private var resortsToShow: [Resort] {
+        resorts.filter { resort in
+            if filters["country"] != nil && filters["country"] != "All" && filters["country"]! != resort.country {
+                return false
+            }
+            
+            if filters["size"] != nil && filters["size"] != "All" && filters["size"]! != resort.sizeString {
+                return false
+            }
+            
+            if filters["price"] != nil && filters["price"] != "All" && filters["price"]! != resort.priceString {
+                return false
+            }
+            return true
+        }
+    }
     @ObservedObject var favorites = Favorites()
     
     var body: some View {
         NavigationView {
-             List(resorts) { resort in
+            List(resortsToShow) { resort in
                  NavigationLink(destination: ResortView(resort: resort)) {
                      Image(resort.country)
                          .resizable()
@@ -69,7 +85,7 @@ struct ContentView: View {
             
         }
         .sheet(isPresented: $showingFilterSheet) {
-            FilterView(resorts: self.$resorts, isFiltered: self.$isFiltered)
+            FilterView(resorts: self.$resorts, filters: self.$filters)
         }
      }
 }
