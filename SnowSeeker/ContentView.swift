@@ -9,11 +9,12 @@
 import SwiftUI
 
 struct ContentView: View {
-     let resorts: [Resort] = Bundle.main.decode("resorts.json")
+    @State private var resorts: [Resort] = Bundle.main.decode("resorts.json")
+    @State private var showingSortingActionSheet = false
     @ObservedObject var favorites = Favorites()
-
-     var body: some View {
-         NavigationView {
+    
+    var body: some View {
+        NavigationView {
              List(resorts) { resort in
                  NavigationLink(destination: ResortView(resort: resort)) {
                      Image(resort.country)
@@ -45,10 +46,26 @@ struct ContentView: View {
                  }
              }
              .navigationBarTitle("Resorts")
+             .navigationBarItems(
+                leading: Button("Filter") {
+                    //do filter
+                }, trailing: Button("Sort") {
+                    self.showingSortingActionSheet = true
+             })
             
             WelcomeView()
          }
          .environmentObject(favorites)
+        .actionSheet(isPresented: $showingSortingActionSheet) {
+            ActionSheet(title: Text("Sort By"), message: nil, buttons: [.default(Text("Default")) {
+                    self.resorts = Bundle.main.decode("resorts.json")
+                }, .default(Text("Alphabetical")) {
+                    self.resorts = self.resorts.sorted { $0.name < $1.name }
+                },.default(Text("Country")) {
+                    self.resorts = self.resorts.sorted { $0.country < $1.country }
+                },.cancel()])
+            
+        }
      }
 }
 

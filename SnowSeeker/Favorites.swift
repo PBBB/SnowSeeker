@@ -17,7 +17,10 @@ class Favorites: ObservableObject {
 
     init() {
         // load our saved data
-
+        if let resorts = UserDefaults.standard.value(forKey: saveKey) as? [String] {
+            self.resorts = Set(resorts)
+            return
+        }
         // still here? Use an empty array
         self.resorts = []
     }
@@ -43,5 +46,6 @@ class Favorites: ObservableObject {
 
     func save() {
         // write out our data
+        UserDefaults.standard.set(Array(resorts), forKey: saveKey)
     }
 }
