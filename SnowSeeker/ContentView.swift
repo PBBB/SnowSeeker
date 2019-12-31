@@ -11,6 +11,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var resorts: [Resort] = Bundle.main.decode("resorts.json")
     @State private var showingSortingActionSheet = false
+    @State private var showingFilterSheet = false
+    @State private var isFiltered = false
     @ObservedObject var favorites = Favorites()
     
     var body: some View {
@@ -48,7 +50,7 @@ struct ContentView: View {
              .navigationBarTitle("Resorts")
              .navigationBarItems(
                 leading: Button("Filter") {
-                    //do filter
+                    self.showingFilterSheet = true
                 }, trailing: Button("Sort") {
                     self.showingSortingActionSheet = true
              })
@@ -65,6 +67,9 @@ struct ContentView: View {
                     self.resorts = self.resorts.sorted { $0.country < $1.country }
                 },.cancel()])
             
+        }
+        .sheet(isPresented: $showingFilterSheet) {
+            FilterView(resorts: self.$resorts, isFiltered: self.$isFiltered)
         }
      }
 }

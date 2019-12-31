@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B148EF123BB16D4008663F4 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B148EF023BB16D4008663F4 /* FilterView.swift */; };
 		2BA32FEC23B8AB6F00F47268 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA32FEB23B8AB6F00F47268 /* AppDelegate.swift */; };
 		2BA32FEE23B8AB6F00F47268 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA32FED23B8AB6F00F47268 /* SceneDelegate.swift */; };
 		2BA32FF023B8AB6F00F47268 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA32FEF23B8AB6F00F47268 /* ContentView.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B148EF023BB16D4008663F4 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		2BA32FE823B8AB6F00F47268 /* SnowSeeker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnowSeeker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA32FEB23B8AB6F00F47268 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BA32FED23B8AB6F00F47268 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				2BA32FEB23B8AB6F00F47268 /* AppDelegate.swift */,
 				2BA32FED23B8AB6F00F47268 /* SceneDelegate.swift */,
 				2BA32FEF23B8AB6F00F47268 /* ContentView.swift */,
+				2B148EF023BB16D4008663F4 /* FilterView.swift */,
 				2BA9059123BA2009001BBB2A /* ResortView.swift */,
 				2BA9059923BA291E001BBB2A /* Favorites.swift */,
 				2BA9059323BA209B001BBB2A /* SkiDetailsView.swift */,
@@ -178,6 +181,7 @@
 				2BA9059023BA1F1D001BBB2A /* WelcomeView.swift in Sources */,
 				2BA9059823BA25E4001BBB2A /* Facility.swift in Sources */,
 				2BA32FEE23B8AB6F00F47268 /* SceneDelegate.swift in Sources */,
+				2B148EF123BB16D4008663F4 /* FilterView.swift in Sources */,
 				2BA9059223BA2009001BBB2A /* ResortView.swift in Sources */,
 				2BA9059A23BA291E001BBB2A /* Favorites.swift in Sources */,
 				2BA9058E23BA1E00001BBB2A /* Bundle-Decodable.swift in Sources */,
